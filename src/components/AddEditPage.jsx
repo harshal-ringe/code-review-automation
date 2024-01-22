@@ -7,6 +7,12 @@ class AddEditPage extends Component {
 	}
 	componentDidMount(){
 		let x= 'abc'
+
+		$.ajax({
+			async: false,
+			url: BASEURL + '/bad-request',
+			success: function (response) {},
+		});
 	}
 	componentWillUnmount(){
 
