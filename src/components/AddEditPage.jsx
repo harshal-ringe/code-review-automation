@@ -4,10 +4,16 @@ class AddEditPage extends Component {
 	constructor(props) {
 		super(props);
 	}
+	componentDidMount(){
+		let x= 'abc'
+	}
+	componentWillUnmount(){
+		
+	}
 	render(){
 		return (
 			<>
-			
+
 			<div><div><div><div style={{fontSize: 15, letterSpacing: 2, marginLeft: 15, marginRight: 15}}>Hello World</div></div></div></div>
 			</>
 		);
