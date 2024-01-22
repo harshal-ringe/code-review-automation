@@ -1,3 +1,4 @@
+import { Loadable } from 'react-loadable';
 import React, { Component } from 'react';
 
 class AddEditPage extends Component {
@@ -8,7 +9,7 @@ class AddEditPage extends Component {
 		let x= 'abc'
 	}
 	componentWillUnmount(){
-		
+
 	}
 	render(){
 		return (
