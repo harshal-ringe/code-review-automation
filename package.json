@@ -1,0 +1,44 @@
+{
+	"name": "code-review-automation",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"format": "npx prettier --config .prettierrc --write \"./src/**/*.jsx\" && npx prettier --config .prettierrc --write \"./src/components/**/*.css\"",
+		"start": "webpack serve --mode development --open --config webpack.config.js",
+		"build": "webpack build --mode production --config webpack.config.js",
+		"prepare": "husky install"
+	},
+	"dependencies": {
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"react-loadable": "^5.5.0",
+		"react-router": "^4.2.0",
+		"react-router-dom": "^4.2.2"
+	},
+	"devDependencies": {
+		"css-loader": "^6.9.1",
+		"dotenv": "^16.3.2",
+		"esbuild-loader": "^4.0.2",
+		"eslint": "^8.56.0",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-plugin-react": "^7.33.2",
+		"eslint-plugin-react-hooks": "^4.6.0",
+		"html-webpack-plugin": "^5.6.0",
+		"husky": "^8.0.3",
+		"lint-staged": "^15.2.0",
+		"prettier": "^3.2.4",
+		"style-loader": "^3.3.4",
+		"webpack": "^5.89.0",
+		"webpack-cli": "^5.1.4",
+		"webpack-dev-server": "^4.15.1"
+	},
+	"engines": {
+		"npm": "^8.19.3",
+		"node": "^16.19.0"
+	},
+	"lint-staged": {
+		"src/**/*.{js,jsx,json,css}": [
+			"prettier --write --config .prettierrc"
+		]
+	}
+}
