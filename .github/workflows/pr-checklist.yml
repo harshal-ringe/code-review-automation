@@ -1,0 +1,40 @@
+name: PR Checklist
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  pr-checklist:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check PR Checklist
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const pr = await github.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+            });
+
+            const checklist = pr.data.body.match(/- \[x\]|\* \[x\]/g) || [];
+            const isChecklistComplete = checklist.length === 3;
+
+            console.log(`PR Checklist Complete: ${isChecklistComplete}`);
+
+            // Set the PR status
+            await github.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.payload.pull_request.head.sha,
+              state: isChecklistComplete ? 'success' : 'failure',
+              context: 'pr-checklist',
+              description: isChecklistComplete
+                ? 'PR Checklist is complete'
+                : 'PR Checklist is incomplete',
+            });
