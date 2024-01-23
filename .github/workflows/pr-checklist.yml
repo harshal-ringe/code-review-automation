@@ -9,15 +9,7 @@ on:
 jobs:
   pr-checklist:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check PR Checklist
-        uses: actions/github-script@v7
+      - uses: mheap/require-checklist-action@v2
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            console.log(context.payload.pull_request.body);
-            const checklist = context.payload.pull_request.body.match(/- \[x\]|\* \[x\]/g) || [];
-            const isChecklistComplete = checklist.length === 3;
-            context.payload.pull_request.state = 'failure'
-            console.log(`PR Checklist Complete: ${isChecklistComplete}`);
+          requireChecklist: false # If this is true and there are no checklists detected, the action will fail
