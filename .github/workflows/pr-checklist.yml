@@ -19,5 +19,5 @@ jobs:
             console.log(context.payload.pull_request.body);
             const checklist = context.payload.pull_request.body.match(/- \[x\]|\* \[x\]/g) || [];
             const isChecklistComplete = checklist.length === 3;
-            context.payload.pull_request.state = isChecklistComplete ? 'success' : 'failure'
+            context.payload.pull_request.state = 'failure'
             console.log(`PR Checklist Complete: ${isChecklistComplete}`);
