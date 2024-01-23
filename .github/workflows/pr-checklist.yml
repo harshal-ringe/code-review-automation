@@ -7,12 +7,42 @@ on:
       - synchronize
 
 jobs:
-  pr-checklist:
+  check-checklist:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use check-list-extract action
+        uses: actions-rs/check-list-extract@v1
+        with:
+          path: 'pull_request.md' # Adjust this if your checklist is elsewhere
+          fail_on_missing: true # Set to false to only warn on missing items
+      - name: Create Commit Status
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const completedItems = context.outputs.completed;
+            const missingItems = context.outputs.missing;
+            let status = 'success';
+            let description = 'All checklist items completed!';
+
+            if (missingItems.length > 0) {
+              status = 'failure';
+              description = `The following checklist items are missing:\n${missingItems.join('\n')}`;
+            }
+
+            github.repos.createStatus({
+              sha: context.sha,
+              context: 'checklist-check',
+              state: status,
+              description: description,
+              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/pull/${context.issue.number}`
+            });
+
     runs-on: ubuntu-latest
 
     steps:
       - name: Check PR Checklist
-        uses: actions/github-script@v5
+        uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
