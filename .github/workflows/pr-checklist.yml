@@ -21,14 +21,3 @@ jobs:
             const isChecklistComplete = checklist.length === 3;
             context.payload.pull_request.state = isChecklistComplete ? 'success' : 'failure'
             console.log(`PR Checklist Complete: ${isChecklistComplete}`);
-
-            # github.repos.createStatus({
-            #   owner: context.repo.owner,
-            #   repo: context.repo.repo,
-            #   sha: context.payload.pull_request.head.sha,
-            #   state: isChecklistComplete ? 'success' : 'failure',
-            #   context: 'pr-checklist',
-            #   description: isChecklistComplete
-            #     ? 'PR Checklist is complete'
-            #     : 'PR Checklist is incomplete',
-            # });
