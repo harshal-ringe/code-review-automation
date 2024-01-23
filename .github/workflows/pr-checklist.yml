@@ -16,6 +16,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            console.log(context.payload);
             const checklist = context.payload.pull_request.body.match(/- \[x\]|\* \[x\]/g) || [];
             const isChecklistComplete = checklist.length === 3;
 
