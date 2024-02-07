@@ -27,7 +27,14 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         with:
           debug: false
-          review_simple_changes: false
-          review_comment_lgtm: false
+          max_files: 20
+          path_filters: |
+            **/src/**/*.jsx
+            **/src/**/*.js
+            **/src/**/*.css
+            **/src/**/*.html
           openai_light_model: 'gpt-3.5-turbo'
           openai_heavy_model: 'gpt-3.5-turbo'
+          openai_retries: 1
+          openai_concurrency_limit: 3
+          summarize: false
