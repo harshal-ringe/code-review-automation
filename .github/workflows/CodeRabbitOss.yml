@@ -8,9 +8,6 @@ on:
   pull_request:
     branches: [main]
     types: [opened, edited, synchronize]
-  pull_request_review_comment:
-    branches: [main]
-    types: [created]
 
 concurrency:
   group: ${{ github.repository }}-${{ github.event.number || github.head_ref || github.sha }}-${{ github.workflow }}-${{ github.event_name == 'pull_request_review_comment' && 'pr_comment' || 'pr' }}
@@ -29,6 +26,10 @@ jobs:
           debug: false
           max_files: 20
           path_filters: |
+            !dist/**
+            !node_modules/**
+            !**/dist/**
+            !**/node_modules/**
             **/src/**/*.jsx
             **/src/**/*.js
             **/src/**/*.css
