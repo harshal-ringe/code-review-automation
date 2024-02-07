@@ -33,6 +33,9 @@ jobs:
             **/src/**/*.js
             **/src/**/*.css
             **/src/**/*.html
+          disable_release_notes: true
           openai_light_model: 'gpt-3.5-turbo'
           openai_heavy_model: 'gpt-3.5-turbo'
           openai_retries: 1
+          summarize: false
+          summarize_release_notes: false
