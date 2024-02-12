@@ -37,14 +37,9 @@ jobs:
             **/src/**/*.js
             **/src/**/*.css
             **/src/**/*.html
-          summarize: |
-            Provide your final response in markdown with the following content:
-
-            - **Walkthrough**: A high-level summary of the overall change instead of specific files within 80 words.
-            - **Changes**: A markdown table of files and their summaries. Group files with similar changes together into a single row to save space.
-
-            Avoid additional commentary as this summary will be added as a comment on the 
-            GitHub pull request. Use the titles "Walkthrough" and "Changes" and they must be H2.
+          disable_release_notes: true
+          summarize: false
+          summarize_release_notes: false
           openai_light_model: 'gpt-3.5-turbo'
           openai_heavy_model: 'gpt-3.5-turbo'
-          openai_retries: 1
+          openai_retries: 2
